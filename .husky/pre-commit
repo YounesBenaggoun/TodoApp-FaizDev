@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+TEST_SCRIPT=$(node -p "require('./package.json').scripts?.test || ''")
+
+if [ -z "$TEST_SCRIPT" ] || echo "$TEST_SCRIPT" | grep -q "no test specified"; then
+  echo "⏭️  Aucun test configuré, on passe."
+  exit 0
+fi
+
+npm test
