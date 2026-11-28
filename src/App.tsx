@@ -11,13 +11,13 @@ type Todo_type = {
 function App() {
   const [priority, setPriority] = useState<Priority_type>("Moyenne");
   const [input, setInput] = useState<string>("");
-  
+
   const savedTodos = localStorage.getItem("todos");
-  const initialTodos = savedTodos ? JSON.parse(savedTodos) : []; 
+  const initialTodos = savedTodos ? JSON.parse(savedTodos) : [];
   const [todos, setTodos] = useState<Todo_type[]>(initialTodos);
 
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
 
   }, [todos]);
@@ -41,6 +41,9 @@ function App() {
 
   }
   console.log("Passage");
+  console.log(todos);
+  let filtredTodos: Todo_type[] = [];
+
 
 
   return (
@@ -51,7 +54,7 @@ function App() {
 
       <div className="flex justify-center" >
         <div className="w-2/3 flex flex-col gap-4 my-15 bg-base-300 p-5 rounded-2xl">
-          <div className="flex gap-4">
+          <div id="Recherche" className="flex gap-4">
             <input
               type="text"
               className="input w-full"
@@ -75,8 +78,27 @@ function App() {
 
             >Ajouter</button>
           </div>
+
+          <div id="Filter" className="flex justify-between" >
+            <div className="flex gap-2">
+              <button className="btn btn-soft">Tous (5)</button>
+              <button className="btn btn-primary">Urgent (5)</button>
+              <button className="btn btn-soft">Moyenne (5)</button>
+              <button className="btn btn-soft">Basse (5)</button>
+            </div>
+
+            <button className="btn btn-warning ">Supprimer</button>
+
+          </div>
+
+          <ul>
+            <li>Voir l'Assurance SAA</li>
+
+          </ul>
+
         </div>
       </div>
+
     </>
   )
 }
